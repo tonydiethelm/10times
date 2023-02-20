@@ -8,6 +8,7 @@ function App() {
 
   //handleclick functions.
   const handleClick = () => {
+    console.log('button was clicked.')
     setTodoList((prev) => [
       ...prev,
       {
@@ -31,7 +32,7 @@ function App() {
       </ul>
       
       <form>
-        <input type="text" id="text" value={input} onInput={(e) =>setInput(e.target.value)}/>
+        <input type="text" id="text" value={input} onInput={(e) =>setInput(e.target.value)}/> 
         <input type="button" onClick={() => handleClick()} value="Press to add Todo to list"/>
       </form>
 
