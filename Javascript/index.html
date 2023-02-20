@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+
+<body>
+
+  <h2>This is a basic To Do list with no frameworks, just good ol' Javascript.</h2>
+  <!--Note that it's not obvious what this is doing by looking at the HTML. 
+    Have to look at the script to figure it out. Not ideal. -->
+  <ul id="todoList" class="todoList"></ul>
+
+  <form>
+    <input name="todoToInput" id="todoToInput" type="text">
+    <input class="button" type="submit" value="Add Todo here">
+  </form>
+
+
+
+
+  <script>
+    console.log('script loaded')
+    // Get DOM elements for later use
+    const form = document.querySelector('form');
+    const userInput = document.querySelector('#todoToInput');
+    const todoList = document.querySelector('#todoList')
+
+    //array to hold all the todos. "Store"
+    const todoData = [];
+
+    //update the UI when that data changes. 
+    function addTodo(todoTextFromForm){
+      console.log('Adding todo')
+      todoData.push(todoTextFromForm)
+      //Need to create document element and put in DOM.
+      //ugly, this is largely taken care of for us with frameworks.
+      //state/data is decoupled from UI, so hard to keep in sync. 
+      const listItem = document.createElement('li');
+      listItem.innerHTML = todoTextFromForm
+      todoList.appendChild(listItem);
+
+      //Have to worry about refreshes, save data to local storage. 
+      localStorage.setItem('todos', JSON.stringify(todoData));
+    }
+
+    //Need an event listener for the form submit.
+    form.onsubmit = (event) => {
+      console.log('form submit firing off')
+      //event.preventDefault(); //don't refresh the page on creation. 
+      addTodo(userInput.value)
+    }
+
+    //lifecycle stuff, have to manage manually
+    const existingTodos = JSON.parse(localStorage.getItem('todos')) || [];
+
+    existingTodos.forEach(todo => {
+      console.log('adding existing todo')
+      addTodo(todo);
+    });
+
+
+  </script>  
+</body>
+</html>
