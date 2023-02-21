@@ -1,0 +1,16 @@
+<template>
+  <h1>${heading}</h1>
+
+  <ul>
+    <li repeat.for="singleTodo of todoList">${singleTodo}</li>
+  </ul>
+
+  <form submit.trigger = "addTodo()">
+    <input type="text" value.bind="todoInputText">
+    <button type="submit" disable.bind="!todoInputText">Press to add Todo to list</button>
+
+  </form>
+
+
+
+</template>
