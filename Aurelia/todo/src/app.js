@@ -1,8 +1,8 @@
 export class App {
   constructor() {
     this.heading = "This is a basic ToDo list using Aurelia";
-    this.todoList = ["test", "another test"];
-    this.todoInputText = "test run";
+    this.todoList = [""];
+    this.todoInputText = "";
   }
 
   addTodo(){
