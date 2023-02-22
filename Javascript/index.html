@@ -16,6 +16,9 @@
     <input class="button" type="submit" value="Press to add Todo to list">
   </form>
 
+  <p>And here is a random cat fact:</p>
+  <div id="catFactHere"></div>
+
 
 
 
@@ -25,6 +28,7 @@
     const form = document.querySelector('form');
     const userInput = document.querySelector('#todoToInput');
     const todoList = document.querySelector('#todoList')
+    const catFact = document.querySelector('#catFactHere');
 
     //array to hold all the todos. "Store"
     const todoData = [];
@@ -42,6 +46,15 @@
 
       //Have to worry about refreshes, save data to local storage. 
       localStorage.setItem('todos', JSON.stringify(todoData));
+
+      //put in random cat fact
+      const catFactFromApi = document.createElement('p');
+      fetch('https://catfact.ninja/fact')
+      .then((response) => response.json())
+      .then((data) => {catFactFromApi.innerText = data.fact})
+      .then(catFact.appendChild(catFactFromApi))
+
+
     }
 
     //Need an event listener for the form submit.
@@ -58,7 +71,7 @@
       console.log('adding existing todo')
       addTodo(todo);
     });
-
+    
 
   </script>  
 </body>
